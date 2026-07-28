@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#7c3aed">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>CharmCraft — AI Conversation Coach</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ========== SCREEN: Home / Coach Victor ========== -->
+  
+  <!-- ========== AUTH SCREENS ========== -->
+  <!-- Welcome -->
+  <section id="screen-auth-welcome" class="screen">
+    <div class="auth-container">
+      <div class="auth-card">
+        <div class="auth-logo">💜</div>
+        <h1 class="auth-title">CharmCraft</h1>
+        <p class="auth-subtitle">Your AI Conversation Coach</p>
+        <div class="auth-actions">
+          <button type="button" class="btn-primary" id="btn-auth-email">📧 Continue with Email</button>
+          <button type="button" class="btn-primary" id="btn-auth-google" style="background:#4285f4;">🔵 Continue with Google</button>
+          <button type="button" class="btn-outline" id="btn-auth-guest">👤 Continue as Guest</button>
+        </div>
+        <p class="auth-footer">Already have an account? <a href="#" id="btn-goto-login">Sign In</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Login -->
+  <section id="screen-auth-login" class="screen">
+    <header class="app-header">
+      <button type="button" class="btn-icon btn-back" id="btn-back-auth-login" aria-label="Back">←</button>
+      <h1 class="header-title">Sign In</h1>
+      <span class="header-spacer"></span>
+    </header>
+    <div class="screen-body">
+      <div class="input-card">
+        <label class="input-label" for="login-email">Email</label>
+        <input type="email" class="input-field" id="login-email" placeholder="you@example.com">
+        <label class="input-label" for="login-password">Password</label>
+        <input type="password" class="input-field" id="login-password" placeholder="••••••••">
+        <button type="button" class="btn-primary" id="btn-login-submit">Sign In</button>
+        <button type="button" class="btn-outline" id="btn-login-google">🔵 Sign in with Google</button>
+        <p class="auth-error" id="login-error-msg"></p>
+        <p class="auth-footer"><a href="#" id="btn-goto-register">Create Account</a> | <a href="#" id="btn-goto-forgot">Forgot Password?</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Register -->
+  <section id="screen-auth-register" class="screen">
+    <header class="app-header">
+      <button type="button" class="btn-icon btn-back" id="btn-back-auth-register" aria-label="Back">←</button>
+      <h1 class="header-title">Create Account</h1>
+      <span class="header-spacer"></span>
+    </header>
+    <div class="screen-body">
+      <div class="input-card">
+        <label class="input-label" for="register-name">Name</label>
+        <input type="text" class="input-field" id="register-name" placeholder="Your name">
+        <label class="input-label" for="register-email">Email</label>
+        <input type="email" class="input-field" id="register-email" placeholder="you@example.com">
+        <label class="input-label" for="register-password">Password</label>
+        <input type="password" class="input-field" id="register-password" placeholder="Min 6 characters">
+        <label class="input-label" for="register-confirm">Confirm Password</label>
+        <input type="password" class="input-field" id="register-confirm" placeholder="Repeat password">
+        <button type="button" class="btn-primary" id="btn-register-submit">Create Account</button>
+        <p class="auth-error" id="register-error-msg"></p>
+        <p class="auth-footer">Already have an account? <a href="#" id="btn-goto-login2">Sign In</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Forgot Password -->
+  <section id="screen-auth-forgot" class="screen">
+    <header class="app-header">
+      <button type="button" class="btn-icon btn-back" id="btn-back-auth-forgot" aria-label="Back">←</button>
+      <h1 class="header-title">Reset Password</h1>
+      <span class="header-spacer"></span>
+    </header>
+    <div class="screen-body">
+      <div class="input-card">
+        <p style="font-size:14px;color:var(--gray-600);margin-bottom:12px">Enter your email and we will send you a reset link.</p>
+        <label class="input-label" for="forgot-email">Email</label>
+        <input type="email" class="input-field" id="forgot-email" placeholder="you@example.com">
+        <button type="button" class="btn-primary" id="btn-forgot-submit">Send Reset Link</button>
+        <p class="auth-error" id="forgot-error-msg"></p>
+        <p class="auth-footer"><a href="#" id="btn-back-to-login">Back to Sign In</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Account -->
+  <section id="screen-account" class="screen">
+    <header class="app-header">
+      <button type="button" class="btn-icon btn-back" id="btn-back-account" aria-label="Back">←</button>
+      <h1 class="header-title">Account</h1>
+      <span class="header-spacer"></span>
+    </header>
+    <div class="screen-body">
+      <div class="profile-card">
+        <div class="profile-avatar" id="account-avatar">👤</div>
+        <h2 class="profile-name" id="account-name">User</h2>
+        <p class="profile-bio" id="account-email">user@example.com</p>
+      </div>
+      <div class="profile-actions">
+        <button type="button" class="btn-primary" id="btn-manage-subscription">⭐ Manage Subscription</button>
+        <button type="button" class="btn-outline" id="btn-verify-email">✉️ Verify Email</button>
+        <button type="button" class="btn-outline" id="btn-sync-now">🔄 Sync Data</button>
+        <button type="button" class="btn-outline" id="btn-account-logout">🚪 Sign Out</button>
+      </div>
+      <div class="coach-knows-card" id="account-sync-status" style="margin-top:16px;">
+        <h3 class="coach-knows-title">☁️ Cloud Status</h3>
+        <div class="coach-knows-grid" id="account-sync-grid">
+          <div class="coach-knows-row"><span class="coach-knows-row-icon">📡</span><span class="coach-knows-row-label">Status</span><span class="coach-knows-row-value" id="sync-status-text">Offline</span></div>
+          <div class="coach-knows-row"><span class="coach-knows-row-icon">⏱️</span><span class="coach-knows-row-label">Last Sync</span><span class="coach-knows-row-value" id="sync-last-text">Never</span></div>
+          <div class="coach-knows-row"><span class="coach-knows-row-icon">📦</span><span class="coach-knows-row-label">Pending</span><span class="coach-knows-row-value" id="sync-pending-text">0</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Subscription -->
+  <section id="screen-subscription" class="screen">
+    <header class="app-header">
+      <button type="button" class="btn-icon btn-back" id="btn-back-subscription" aria-label="Back">←</button>
+      <h1 class="header-title">Premium</h1>
+      <span class="header-spacer"></span>
+    </header>
+    <div class="screen-body">
+      <div class="premium-hero"><span class="premium-crown">👑</span><h2>Go Premium</h2><p>Unlock your full potential</p></div>
+      <div class="premium-plans">
+        <button type="button" class="btn-primary btn-premium" id="btn-sub-monthly"><span class="plan-name">Monthly</span><span class="plan-price">$4.99/mo</span></button>
+        <button type="button" class="btn-primary btn-premium btn-premium-best" id="btn-sub-yearly"><span class="plan-badge">Best Value</span><span class="plan-name">Yearly</span><span class="plan-price">$29.99/yr</span></button>
+        <button type="button" class="btn-primary btn-premium" id="btn-sub-lifetime"><span class="plan-name">Lifetime</span><span class="plan-price">$79.99 once</span></button>
+      </div>
+      <p class="auth-footer" style="text-align:center;margin-top:12px"><a href="#" id="btn-restore-purchases">Restore Purchases</a></p>
+    </div>
+  </section>
+
+
+  <section id="screen-home" class="screen active">
+    <header class="app-header">
+      <div class="header-left">
+        <span class="logo-icon">💜</span>
+        <h1 class="logo-text">CharmCraft</h1>
+      </div>
+      <button type="button" class="btn-icon" id="btn-go-premium-header" aria-label="Premium">
+        <span class="premium-badge">✨</span>
+      </button>
+    </header>
+
+    <div class="coach-card">
+      <div class="coach-avatar-row">
+        <div class="coach-avatar">🧠</div>
+        <div>
+          <h2 class="coach-name">Coach Victor</h2>
+          <p class="coach-status">Online • Ready to help</p>
+        </div>
+      </div>
+      <div class="coach-chat-area" id="coach-chat-area">
+        <div class="chat-bubble coach-bubble">
+          <p>Hey there! I'm Coach Victor. How can I help you level up your communication today? 💬</p>
+        </div>
+      </div>
+      <div class="coach-input-row">
+        <label for="coach-input" class="sr-only">Message for Coach Victor</label>
+        <input type="text" class="coach-input" id="coach-input" placeholder="Ask Coach Victor anything...">
+        <button type="button" class="btn-send" id="btn-coach-send" aria-label="Send message">➤</button>
+      </div>
+    </div>
+
+    
+    <div class="today-progress" id="today-progress">
+      <div class="progress-header">
+        <h3 class="section-title">📊 Today's Progress</h3>
+        <span class="progress-streak" id="progress-streak">🔥 1 Day</span>
+      </div>
+      <div class="progress-level-row">
+        <span class="progress-level-badge" id="progress-level">Lv.1</span>
+        <div class="progress-bar-bg"><div class="progress-bar-fill" id="progress-xp-bar" style="width:0%"></div></div>
+        <span class="progress-xp-text" id="progress-xp-text">0/100 XP</span>
+      </div>
+      <div class="daily-missions" id="daily-missions">
+        <p class="daily-missions-title">🎯 Daily Missions</p>
+        <div class="daily-missions-list" id="daily-missions-list"></div>
+          <div class="daily-missions-done" id="daily-missions-done" onclick="document.getElementById('daily-missions-done').style.display='none'">🎉 All missions complete! +25 XP Bonus claimed!</div>
+      </div>
+    </div>
+
+    
+    <div class="coach-insight-card" id="coach-insight-card">
+      <div class="coach-insight-header">
+        <span class="coach-insight-avatar">🧠</span>
+        <div>
+          <p class="coach-insight-title">Coach Victor</p>
+          <p class="coach-insight-subtitle">Today's Insight</p>
+        </div>
+      </div>
+      <div class="coach-insight-body" id="coach-insight-body">
+        <p>Start a conversation to get your first insight!</p>
+      </div>
+      <div class="coach-insight-stats" id="coach-insight-stats"></div>
+    </div>
+
+
+    <div class="quick-tools">
+      <h3 class="section-title">Quick Tools</h3>
+      <div class="tools-grid">
+        <button type="button" class="tool-card" id="btn-reply-assistant">
+          <span class="tool-icon">✍️</span>
+          <span class="tool-label">Reply Assistant</span>
+        </button>
+        <button type="button" class="tool-card" id="btn-chat-analyzer">
+          <span class="tool-icon">🔍</span>
+          <span class="tool-label">Chat Analyzer</span>
+        </button>
+        <button type="button" class="tool-card" id="btn-pickup-lines">
+          <span class="tool-icon">🔥</span>
+          <span class="tool-label">Pickup Lines</span>
+        </button>
+        <button type="button" class="tool-card" id="btn-convo-starter">
+          <span class="tool-icon">🎯</span>
+          <span class="tool-label">Conversation Starter</span>
+        </button>
+        <button type="button" class="tool-card" id="btn-status-studio">
+          <span class="tool-icon">✨</span>
+          <span class="tool-label">Status Studio</span>
+        </button>
+        <button type="button" class="tool-card" id="btn-charm-score">
+          <span class="tool-icon">⭐</span>
+          <span class="tool-label">Charm Score</span>
+        </button>
+        <button type="button" class="tool-card" id="btn-conversation-insights">
+          <span class="tool-icon">📊</span>
+          <span class="tool-label">Insights</span>
+        </button>
+        <button type="button" class="tool-card" id="btn-achievements">
+          <span class="tool-icon">🏆</span>
+          <span class="tool-label">Achievements</span>
+        </button>
+        <button type="button" class="tool-card" id="btn-account">
+          <span class="tool-icon">👤</span>
+          <span class="tool-label">Account</span>
+        </button>
+        <button type="button" class="tool-card" id="btn-conversation-practice">
+          <span class="tool-icon">🎭</span>
+          <span class="tool-label">Conversation Practice</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SCREEN: Reply Assistant ========== -->
+  <section id="screen-reply-assistant" class="screen">
+    <header class="app-header">
+      <button type="button" class="btn-icon btn-back" id="btn-back-reply-assistant" aria-label="Back">←</button>
+      <h1 class="header-title">Reply Assistant</h1>
+      <span class="header-spacer"></span>
+    </header>
+    <div class="screen-body">
+      <div class="tool-hero">
+        <span class="tool-hero-icon">✍️</span>
+        <h2>Reply Assistant</h2>
+        <p>Paste a message you received and get smart reply suggestions.</p>
+      </div>
+      <div class="input-card">
+        <label class="input-label" for="reply-input">Message You Received</label>
+        <textarea class="input-textarea" id="reply-input" placeholder="Paste the message here..."></textarea>
+        <label class="input-label" for="reply-context">Context (optional)</label>
+        <select class="input-select" id="reply-context">
+          <option value="dating">Dating</option>
+          <option value="friendship">Friendship</option>
+          <option value="networking">Networking</option>
+          <option value="casual">Casual</option>
+          <option value="professional">Professional</option>
+        </select>
+        <button type="button" class="btn-primary" id="btn-generate-reply">Generate Replies</button>
+      </div>
+      <div class="results-area" id="reply-results"></div>
+    </div>
+  </section>
+
+  <!-- ========== SCREEN: Chat Analyzer ========== -->
+  <section id="screen-chat-analyzer" class="screen">
+    <header class="app-header">
+      <button type="button" class="btn-icon btn-back" id="btn-back-chat-analyzer" aria-label="Back">←</button>
+      <h1 class="header-title">Chat Analyzer</h1>
+      <span class="header-spacer"></span>
+    </header>
+    <div class="screen-body">
+      <div class="tool-hero">
+        <span class="tool-hero-icon">🔍</span>
+        <h2>Chat Analyzer</h2>
+        <p>Paste a conversation to get insights on tone, engagement, and areas to improve.</p>
+      </div>
+      <div class="input-card">
+        <label class="input-label" for="analyzer-input">Conversation Text</label>
+        <textarea class="input-textarea" id="analyzer-input" placeholder="Paste your conversation here..."></textarea>
+        <button type="button" class="btn-primary" id="btn-analyze-chat">Analyze Chat</button>
+      </div>
+      <div class="results-area" id="analyzer-results"></div>
+    </div>
+  </section>
+
+  <!-- ========== SCREEN: Pickup Line Generator ========== -->
+  <section id="screen-pickup-lines" class="screen">
+    <header class="app-header">
+      <button type="button" class="btn-icon btn-back" id="btn-back-pickup-lines" aria-label="Back">←</button>
+      <h1 class="header-title">Pickup Lines</h1>
+      <span class="header-spacer"></span>
+    </header>
+    <div class="screen-body">
+      <div class="tool-hero">
+        <span class="tool-hero-icon">🔥</span>
+        <h2>Pickup Line Generator</h2>
+        <p>Generate clever, funny, or smooth pickup lines tailored to any situation.</p>
+      </div>
+      <div class="input-card">
+        <label class="input-label">Style</label>
+        <div class="chip-row" id="pickup-style-chips">
+          <button type="button" class="chip active" data-style="funny">😂 Funny</button>
+          <button type="button" class="chip" data-style="smooth">😎 Smooth</button>
+          <button type="button" class="chip" data-style="clever">🧠 Clever</button>
+          <button type="button" class="chip" data-style="bold">💪 Bold</button>
+        </div>
+        <label class="input-label" for="pickup-hint">Context Hint (optional)</label>
+        <input type="text" class="input-field" id="pickup-hint" placeholder="e.g., at a coffee shop, gym, library...">
+        <button type="button" class="btn-primary" id="btn-generate-pickup">Generate Line</button>
+      </div>
+      <div class="results-area" id="pickup-results"></div>
+    </div>
+  </section>
+
+  <!-- ========== SCREEN: Status Studio ========== -->
+  <section id="screen-status-studio" class="screen">
+    <header class="app-header">
+      <button type="button" class="btn-icon btn-back" id="btn-back-status-studio" aria-label="Back">←</button>
+      <h1 class="header-title">Status Studio</h1>
+      <span class="header-spacer"></span>
+    </header>
+    <div class="screen-body">
+      <div class="tool-hero">
+        <span class="tool-hero-icon">✨</span>
+        <h2>Status Studio</h2>
+        <p>Craft witty, deep, or aesthetic status updates for your socials.</p>
+      </div>
+      <div class="input-card">
+        <label class="input-label">Vibe</label>
+        <div class="chip-row" id="status-vibe-chips">
+          <button type="button" class="chip active" data-vibe="witty">😏 Witty</button>
+          <button type="button" class="chip" data-vibe="deep">🌊 Deep</button>
+          <button type="button" class="chip" data-vibe="aesthetic">🎨 Aesthetic</button>
+          <button type="button" class="chip" data-vibe="confident">🦁 Confident</button>
+        </div>
+        <button type="button" class="btn-primary" id="btn-generate-status">Generate Status</button>
+      </div>
+      <div class="results-area" id="status-results"></div>
+    </div>
+  </section>
+
+  <!-- ========== SCREEN: Conversation Starter ========== -->
+  <section id="screen-convo-starter" class="screen">
+    <header class="app-header">
+      <button type="button" class="btn-icon btn-back" id="btn-back-convo-starter" aria-label="Back">←</button>
+      <h1 class="header-title">Conversation Starter</h1>
+      <span class="header-spacer"></span>
+    </header>
+    <div class="screen-body">
+      <div class="tool-hero">
+        <span class="tool-hero-icon">🎯</span>
+        <h2>Conversation Starter</h2>
+        <p>Never run out of things to say. Get the perfect opener for any situation.</p>
+      </div>
+      <div class="input-card">
+        <label class="input-label" for="starter-scenario">Scenario</label>
+        <select class="input-select" id="starter-scenario">
+          <option value="first-date">First Date</option>
+          <option value="texting">Texting a Crush</option>
+          <option value="party">At a Party</option>
+          <option value="work-event">Work / Networking Event</option>
+          <option value="reconnect">Reconnecting</option>
+          <option value="dm">Sliding Into DMs</option>
+        </select>
+        <button type="button" class="btn-primary" id="btn-generate-starter">Get Starters</button>
+      </div>
+      <div class="results-area" id="starter-results"></div>
+    </div>
+  </section>
+
+  <!-- ========== SCREEN: Charm Score ========== -->
+  <section id="screen-charm-score" class="screen">
+    <header class="app-header">
+      <button type="button" class="btn-icon btn-back" id="btn-back-charm-score" aria-label="Back">←</button>
+      <h1 class="header-title">Charm Score</h1>
+      <span class="header-spacer"></span>
+    </header>
+    <div class="screen-body">
+      <div class="charm-hero">
+        <div class="charm-circle">
+          <span class="charm-number" id="charm-score-value"></span>
+          <span class="charm-label">Charm Score</span>
+        </div>
+        <p class="charm-subtitle">Keep practicing to level up your charm!</p>
+      </div>
+      <div class="charm-stats">
+        <div class="stat-row">
+          <span class="stat-label">Confidence</span>
+          <div class="stat-bar-bg"><div class="stat-bar-fill" id="charm-confidence-bar"></div></div>
+          <span class="stat-value" id="charm-confidence-val"></span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Wit</span>
+          <div class="stat-bar-bg"><div class="stat-bar-fill" id="charm-wit-bar"></div></div>
+          <span class="stat-value" id="charm-wit-val"></span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Empathy</span>
+          <div class="stat-bar-bg"><div class="stat-bar-fill" id="charm-empathy-bar"></div></div>
+          <span class="stat-value" id="charm-empathy-val"></span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Rizz</span>
+          <div class="stat-bar-bg"><div class="stat-bar-fill" id="charm-rizz-bar"></div></div>
+          <span class="stat-value" id="charm-rizz-val"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SCREEN: Favorites ========== -->
+  <section id="screen-favorites" class="screen">
+    <header class="app-header">
+      <button type="button" class="btn-icon btn-back" id="btn-back-favorites" aria-label="Back">←</button>
+      <h1 class="header-title">Favorites</h1>
+      <span class="header-spacer"></span>
+    </header>
+    <div class="screen-body">
+      <div class="empty-state" id="favorites-empty">
+        <span class="empty-icon">💾</span>
+        <h2>No Favorites Yet</h2>
+        <p>Save your favorite replies, pickup lines, and conversation starters here.</p>
+      </div>
+      <div class="results-area" id="favorites-list"></div>
+    </div>
+  </section>
+
+  <!-- ========== SCREEN: Profile ========== -->
+  <section id="screen-profile" class="screen">
+    <header class="app-header">
+      <button type="button" class="btn-icon btn-back" id="btn-back-profile" aria-label="Back">←</button>
+      <h1 class="header-title">Profile</h1>
+      <span class="header-spacer"></span>
+    </header>
+    <div class="screen-body">
+      <div class="profile-card">
+        <div class="profile-avatar" id="profile-avatar">😊</div>
+        <h2 class="profile-name" id="profile-name">CharmCraft User</h2>
+        <p class="profile-bio" id="profile-bio">Level up your communication skills</p>
+        <div class="profile-stats-row">
+          <div class="profile-stat">
+            <span class="profile-stat-num" id="profile-tools-used">0</span>
+            <span class="profile-stat-label">Tools Used</span>
+          </div>
+          <div class="profile-stat">
+            <span class="profile-stat-num" id="profile-favs-count">0</span>
+            <span class="profile-stat-label">Favorites</span>
+          </div>
+          <div class="profile-stat">
+            <span class="profile-stat-num" id="profile-streak">0</span>
+            <span class="profile-stat-label">Day Streak</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="profile-gamify-card" id="profile-gamify-card">
+        <div class="profile-stats-row profile-insights-row" style="margin-bottom:8px;" id="profile-insights-row">
+
+          <div class="profile-stat">
+            <span class="profile-stat-num" id="profile-lifetime-convos">0</span>
+            <span class="profile-stat-label">Conversations</span>
+          </div>
+          <div class="profile-stat">
+            <span class="profile-stat-num" id="profile-best-skill">--</span>
+            <span class="profile-stat-label">Best Skill</span>
+          </div>
+          <div class="profile-stat">
+            <span class="profile-stat-num" id="profile-avg-score">0%</span>
+            <span class="profile-stat-label">Avg Score</span>
+          </div>
+
+        </div>
+        <div class="profile-stats-row" style="margin-bottom:12px;">
+          <div class="profile-stat">
+            <span class="profile-stat-num" id="profile-level">1</span>
+            <span class="profile-stat-label">Level</span>
+          </div>
+          <div class="profile-stat">
+            <span class="profile-stat-num" id="profile-xp">0</span>
+            <span class="profile-stat-label">XP</span>
+          </div>
+          <div class="profile-stat">
+            <span class="profile-stat-num" id="profile-lifetime-xp">0</span>
+            <span class="profile-stat-label">Lifetime XP</span>
+          </div>
+        </div>
+        <div class="profile-stats-row">
+          <div class="profile-stat">
+            <span class="profile-stat-num" id="profile-ach-count">0</span>
+            <span class="profile-stat-label">Achievements</span>
+          </div>
+          <div class="profile-stat">
+            <span class="profile-stat-num" id="profile-current-streak">0</span>
+            <span class="profile-stat-label">Streak 🔥</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="profile-actions">
+        <button type="button" class="btn-primary" id="btn-edit-profile">Edit Profile</button>
+        <button type="button" class="btn-outline" id="btn-go-premium-profile">Upgrade to Premium ✨</button>
+      </div>
+      <div class="coach-knows-card" id="coach-knows-card" style="display:none;">
+        <h3 class="coach-knows-title">🧠 Coach Knows</h3>
+        <div class="coach-knows-grid" id="coach-knows-grid"></div>
+      </div>
+      <div class="coach-knows-card" id="emotion-trends-card" style="display:none;">
+        <h3 class="coach-knows-title">💭 Emotional Trends</h3>
+        <div class="coach-knows-grid" id="emotion-trends-grid"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SCREEN: Premium ========== -->
+  <section id="screen-premium" class="screen">
+    <header class="app-header">
+      <button type="button" class="btn-icon btn-back" id="btn-back-premium" aria-label="Back">←</button>
+      <h1 class="header-title">Premium</h1>
+      <span class="header-spacer"></span>
+    </header>
+    <div class="screen-body">
+      <div class="premium-hero">
+        <span class="premium-crown">👑</span>
+        <h2>CharmCraft Premium</h2>
+        <p>Unlock your full potential</p>
+      </div>
+      <div class="premium-features">
+        <div class="premium-feature"><span>✅</span> Unlimited Coach Victor chats</div>
+        <div class="premium-feature"><span>✅</span> Advanced Chat Analysis</div>
+        <div class="premium-feature"><span>✅</span> Unlimited Pickup Lines</div>
+        <div class="premium-feature"><span>✅</span> Custom Status styles</div>
+        <div class="premium-feature"><span>✅</span> Save unlimited Favorites</div>
+        <div class="premium-feature"><span>✅</span> Priority support</div>
+      </div>
+      <div class="premium-plans">
+        <button type="button" class="btn-primary btn-premium" id="btn-premium-monthly">
+          <span class="plan-name">Monthly</span>
+          <span class="plan-price">$4.99/mo</span>
+        </button>
+        <button type="button" class="btn-primary btn-premium btn-premium-best" id="btn-premium-yearly">
+          <span class="plan-badge">Best Value</span>
+          <span class="plan-name">Yearly</span>
+          <span class="plan-price">$29.99/yr</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SCREEN: Settings ========== -->
+  <section id="screen-settings" class="screen">
+    <header class="app-header">
+      <button type="button" class="btn-icon btn-back" id="btn-back-settings" aria-label="Back">←</button>
+      <h1 class="header-title">Settings</h1>
+      <span class="header-spacer"></span>
+    </header>
+    <div class="screen-body">
+      <div class="settings-group">
+        <h3 class="settings-group-title">Appearance</h3>
+        <div class="settings-row">
+          <span>Dark Mode</span>
+          <label class="toggle" for="toggle-dark-mode">
+            <input type="checkbox" id="toggle-dark-mode">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="settings-row">
+          <label for="setting-font-size">Font Size</label>
+          <select class="input-select input-select-sm" id="setting-font-size">
+            <option value="small">Small</option>
+            <option value="medium" selected>Medium</option>
+            <option value="large">Large</option>
+          </select>
+        </div>
+      </div>
+      <div class="settings-group">
+        <h3 class="settings-group-title">Notifications</h3>
+        <div class="settings-row">
+          <span>Daily Tips</span>
+          <label class="toggle" for="toggle-daily-tips">
+            <input type="checkbox" id="toggle-daily-tips" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="settings-row">
+          <span>Practice Reminders</span>
+          <label class="toggle" for="toggle-reminders">
+            <input type="checkbox" id="toggle-reminders" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+      <div class="settings-group">
+        <h3 class="settings-group-title">Coach Memory</h3>
+        <div class="settings-row">
+          <span>Coach Memory</span>
+          <label class="toggle" for="toggle-memory-enabled">
+            <input type="checkbox" id="toggle-memory-enabled" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="settings-row">
+          <button type="button" class="btn-danger-text" id="btn-clear-memory" aria-label="Clear Coach Memory">🗑️ Clear Coach Memory</button>
+        </div>
+      </div>
+      
+      <div class="settings-group">
+        <h3 class="settings-group-title">Progress</h3>
+        <div class="settings-row">
+          <button type="button" class="btn-danger-text" id="btn-reset-progress" aria-label="Reset Progress">🗑️ Reset Progress</button>
+        </div>
+      </div>
+
+      
+      <div class="settings-group">
+        <h3 class="settings-group-title">Administration</h3>
+        <div class="settings-row">
+          <button type="button" class="btn-primary" id="btn-open-admin" aria-label="Open Admin Dashboard" style="width:auto;padding:8px 16px;font-size:13px;">🔐 Admin Dashboard</button>
+        </div>
+      </div>
+
+
+      <div class="settings-group">
+        <h3 class="settings-group-title">About</h3>
+        <div class="settings-row">
+          <span>Version</span>
+          <span class="settings-value">1.0.0</span>
+        </div>
+        <div class="settings-row">
+          <span>Made with</span>
+          <span class="settings-value">💜</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SCREEN: Conversation Practice ========== -->
+  <section id="screen-conversation-practice" class="screen">
+    <header class="app-header">
+      <button type="button" class="btn-icon btn-back" id="btn-back-conversation-practice" aria-label="Back">←</button>
+      <h1 class="header-title">Conversation Practice</h1>
+      <span class="header-spacer"></span>
+    </header>
+    <div class="screen-body">
+      <!-- Scenario Selector -->
+      <div class="practice-scenario-bar" id="practice-scenario-bar">
+        <p class="practice-scenario-label">Choose a scenario:</p>
+        <div class="practice-scenario-grid" id="practice-scenario-grid">
+          <button type="button" class="practice-scenario-card active" data-scenario="crush" aria-label="Crush scenario">
+            <span class="practice-scenario-emoji">❤️</span>
+            <span class="practice-scenario-name">Crush</span>
+          </button>
+          <button type="button" class="practice-scenario-card" data-scenario="interview" aria-label="Job Interview scenario">
+            <span class="practice-scenario-emoji">💼</span>
+            <span class="practice-scenario-name">Job Interview</span>
+          </button>
+          <button type="button" class="practice-scenario-card" data-scenario="friend" aria-label="New Friend scenario">
+            <span class="practice-scenario-emoji">👥</span>
+            <span class="practice-scenario-name">New Friend</span>
+          </button>
+          <button type="button" class="practice-scenario-card" data-scenario="networking" aria-label="Networking scenario">
+            <span class="practice-scenario-emoji">💬</span>
+            <span class="practice-scenario-name">Networking</span>
+          </button>
+          <button type="button" class="practice-scenario-card" data-scenario="relationship" aria-label="Relationship scenario">
+            <span class="practice-scenario-emoji">💕</span>
+            <span class="practice-scenario-name">Relationship</span>
+          </button>
+          <button type="button" class="practice-scenario-card" data-scenario="difficult" aria-label="Difficult Conversation scenario">
+            <span class="practice-scenario-emoji">😡</span>
+            <span class="practice-scenario-name">Difficult Talk</span>
+          </button>
+          <button type="button" class="practice-scenario-card" data-scenario="dating-app" aria-label="Online Dating scenario">
+            <span class="practice-scenario-emoji">📱</span>
+            <span class="practice-scenario-name">Online Dating</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Practice Chat Area -->
+      <div class="practice-chat-card" id="practice-chat-card" style="display:none;">
+        <div class="practice-chat-area" id="practice-chat-area">
+          <div class="chat-bubble coach-bubble" id="practice-opening-msg">
+            <p>Select a scenario and press Start Practice to begin.</p>
+          </div>
+        </div>
+        <div class="coach-input-row">
+          <label for="practice-input" class="sr-only">Your response</label>
+          <input type="text" class="coach-input" id="practice-input" placeholder="Type your response...">
+          <button type="button" class="btn-send" id="btn-practice-send" aria-label="Send message">➤</button>
+        </div>
+      </div>
+
+      <!-- Scoring Feedback (shown every 5 messages) -->
+      <div class="practice-feedback" id="practice-feedback" style="display:none;"></div>
+
+      <!-- Session Summary -->
+      <div class="practice-summary" id="practice-summary" style="display:none;"></div>
+
+      <!-- Action Buttons -->
+      <div class="practice-actions" id="practice-actions">
+        <button type="button" class="btn-primary" id="btn-start-practice">Start Practice</button>
+        <button type="button" class="btn-outline" id="btn-finish-practice" style="display:none;">Finish Practice</button>
+      </div>
+    </div>
+  </section>
+
+  
+
+  <!-- ========== SCREEN: Conversation Insights ========== -->
+  <section id="screen-conversation-insights" class="screen">
+    <header class="app-header">
+      <button type="button" class="btn-icon btn-back" id="btn-back-conversation-insights" aria-label="Back">←</button>
+      <h1 class="header-title">Conversation Insights</h1>
+      <span class="header-spacer"></span>
+    </header>
+    <div class="screen-body" id="insights-screen-body">
+      <div class="insights-hero" id="insights-hero">
+        <div class="insights-circle" id="insights-circle">
+          <span class="insights-number" id="insights-overall">--</span>
+          <span class="insights-label">Overall Charm</span>
+        </div>
+      </div>
+      <div class="insights-stats" id="insights-stats"></div>
+      <div class="insights-analysis" id="insights-analysis"></div>
+      <div class="insights-actions">
+        <button type="button" class="btn-primary" id="btn-view-weekly" aria-label="View weekly growth">📈 Weekly Growth</button>
+      </div>
+      <div class="insights-weekly" id="insights-weekly" style="display:none;"></div>
+    </div>
+  </section>
+
+  <!-- ========== SCREEN: Achievements ========== -->
+  <section id="screen-achievements" class="screen">
+    <header class="app-header">
+      <button type="button" class="btn-icon btn-back" id="btn-back-achievements" aria-label="Back">←</button>
+      <h1 class="header-title">Achievements</h1>
+      <span class="header-spacer"></span>
+    </header>
+    <div class="screen-body">
+      <div class="achievements-stats-row">
+        <div class="achievements-stat"><span class="achievements-stat-num" id="ach-unlocked">0</span><span class="achievements-stat-label">Unlocked</span></div>
+        <div class="achievements-stat"><span class="achievements-stat-num" id="ach-total">0</span><span class="achievements-stat-label">Total</span></div>
+      </div>
+      <div class="achievements-grid" id="achievements-grid"></div>
+    </div>
+  </section>
+
+  <!-- ========== BOTTOM NAVIGATION ========== -->
+  <nav class="bottom-nav">
+    <button type="button" class="nav-item active" data-screen="screen-home" id="nav-home">
+      <span class="nav-icon">🏠</span>
+      <span class="nav-label">Coach</span>
+    </button>
+    <button type="button" class="nav-item" data-screen="screen-favorites" id="nav-favorites">
+      <span class="nav-icon">💾</span>
+      <span class="nav-label">Favorites</span>
+    </button>
+    <button type="button" class="nav-item" data-screen="screen-charm-score" id="nav-charm-score">
+      <span class="nav-icon">⭐</span>
+      <span class="nav-label">Charm</span>
+    </button>
+    <button type="button" class="nav-item" data-screen="screen-profile" id="nav-profile">
+      <span class="nav-icon">👤</span>
+      <span class="nav-label">Profile</span>
+    </button>
+    <button type="button" class="nav-item" data-screen="screen-settings" id="nav-settings">
+      <span class="nav-icon">⚙️</span>
+      <span class="nav-label">Settings</span>
+    </button>
+  </nav>
+
+    <script src="services/repository.js"></script>
+  <script src="services/sync-service.js"></script>
+  <script src="services/auth-service.js"></script>
+  <script src="services/premium-service.js"></script>
+  <script src="services/ai-provider.js"></script>
+  <script src="services/error-service.js"></script>
+  <script src="services/migration-service.js"></script>
+  <script src="services/backup-engine.js"></script>
+  <script src="services/firebase-service.js"></script>
+  <script src="services/cloud-sync.js"></script>
+  <script src="services/notification-service.js"></script>
+  <script src="services/analytics-service.js"></script>
+  <script src="services/remote-config-service.js"></script>
+  <script src="services/security-service.js"></script>
+  <script src="services/performance-service.js"></script>
+  <script src="config-service.js"></script>
+  <script src="script.js" defer></script>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js', {scope: '/'})
+        .then(function(reg) { console.log('SW registered:', reg.scope); })
+        .catch(function(err) { console.log('SW failed:', err); });
+    }
+  </script>
+
+</body>
+</html>
